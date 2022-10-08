@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block keywords %}{% endblock keywords %}
+{% block description %}{% endblock description %}
+{% block title %}{{course.name}} | Course {% endblock title %}
+{% load course_discount_tag %}
+{% block body %}
+<section class="page-wrapper">
+  <div class="tutori-course-content ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 col-xl-8">
+            <h3>{{course.name}} </h3>
+            <br>
+            <p>{{course.desciption}} </p>
+            <h3>What You will Learn?</h3>
+            <div class="container">
+              {% for learning in course.learing_set.all %}
+              <li>
+               {{learning.desciption}}
+              </li>
+              {% endfor %}
+            </div>
+            <br>
+            <h3>Prerequisite :-</h3>
+            <div class="container">
+              {% for prerequisite in course.prerequisite_set.all %}
+              <li>
+                {{prerequisite.desciption}}
+              </li>
+              {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-5 col-xl-4">
+          <!-- Course Sidebar start -->
+          <div class="course-sidebar course-sidebar-2 mt-5 mt-lg-0">
+            <div class="course-widget course-details-info">
+              <div class="course-thumbnail">
+                <img src="{{course.thumbnail.url}}" alt="" class="img-fluid w-100">
+              </div>
+
+
+
+
+
+              {% if coupon %}
+
+
+
+
+
+
+              <div class="container">
+                <p>Coupon Code Applied Successfully! You Have Got {{coupon.discount}}% Discount </p>
+              </div>
+              <div class="price-header">
+                <h2 class="course-price">
+                  {% cal_sellprice course.price coupon.discount as value%}
+                  {{value|rupee}}
+                  <span>{{course.price|rupee}}</span></h2>
+                  <span class="course-price-badge onsale">{{coupon.discount}}% off</span>
+                </div>
+                <div class="buy-btn">
+                  <a href="?action=create_payment&couponcode={{coupon.code}}">
+                    <button class="button button-enroll-course btn btn-main-2 rounded">
+                      <i class="far fa-shopping-cart me-2"></i>Enroll Course</button>
+                  </a>
+                  <ul class="course-sidebar-list">
+                    <li>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-play-circle"></i>Lectures</span>
+                        {{course.chapter}}
+                      </div>
+                    </li>
+                    <li>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span><i class="far fa-clock"></i>Duration</span>
+                        {{course.hours}} hours
+                      </div>
+                    </li>
+                    <li>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span><i class="far fa-globe"></i>Language</span>
+                        English
+                      </div>
+                    </li>
+                    <li>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span><i class="far fa-calendar"></i>Updated </span>
+                        {{course.date}}
+                      </div>
+                    </li>
+                  </ul>
+
+                {% else %}
+
+
+
+
+
+
+                <div class="price-header">
+                  <h2 class="course-price">
+                    {% cal_sellprice course.price course.discount as value%}
+                    {{value|rupee}}
+                    <span>{{course.price|rupee}}</span></h2>
+                    <span class="course-price-badge onsale">{{course.discount}}% off</span>
+                  </div>
+                 
+                    
+                 
+
+
+
+
+
+
+              <ul class="course-sidebar-list">
+                <li>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span><i class="fas fa-play-circle"></i>Lectures</span>
+                    {{course.chapter}}
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span><i class="far fa-clock"></i>Duration</span>
+                    {{course.hours}} hours
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span><i class="far fa-globe"></i>Language</span>
+                    English
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span><i class="far fa-calendar"></i>Updated </span>
+                    {{course.date}}
+                  </div>
+                </li>
+              </ul>
+              <div class="buy-btn">
+                <a href="?action=create_payment">
+                  <button class="button button-enroll-course btn btn-main-2 rounded">
+                    <i class="far fa-shopping-cart me-2"></i>Enroll Course</button>
+                </a>
+              </div>
+              {% endif %}
+              <div class="course-meterial">
+                {% if coupon_code_message %}
+                  <div class="container">
+                      {{coupon_code_message}}
+                  </div>
+                {% endif %}
+                <form action="#">
+                    <input type="text" name="couponcode" class="form-control" placeholder="Apply a Coupon">
+                    <br>
+                    <button type="Submit" value="Apply" class="button button-enroll-course btn btn-main-2 rounded">
+                      Submit
+                    </button>
+                </form>
+             </div>
+              <div class="course-meterial">
+                <h4 class="mb-3">Material Includes</h4>
+                <ul class="course-meterial-list">
+                  <li><i class="fal fa-long-arrow-right"></i>Videos</li>
+                  <li><i class="fal fa-long-arrow-right"></i>Files For Development</li>
+                  <li><i class="fal fa-long-arrow-right"></i>Documentation Files</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- Course Sidebar end -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% if order is not None %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "rzp_test_2xxXDhFkVtXYeu", // Enter the Key ID generated from the Dashboard
+        "name": "Wish Abroad Education Agency",
+        "description": "Payment For {{course.name}}",
+        "image": "http://127.0.0.1:8000/static/assets/images/top-logo.png",
+        "order_id": "{{order.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "callback_url": "http://127.0.0.1:8000/course/VerifyPayment",
+        "prefill": {
+            "name": "{{user.username}",
+            "email": "{{user.email}}",
+            "contact": ""
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+</script>
+{% endif %}
+{% if error is not None %}
+  <script>
+    window.onload = ()=>{
+      alert("{{error}}")
+    }
+  </script>
+{% endif %}
+{% endblock body %}

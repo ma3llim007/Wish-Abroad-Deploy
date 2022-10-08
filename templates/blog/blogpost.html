@@ -1,0 +1,50 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}{{blog.title}} | Wish Abroad{% endblock title %}
+{% block keywords %} {{blog.keyword}} {% endblock keywords %}
+{% block description %} {{blog.describe}} {% endblock description %}
+
+{% block body %}
+<div class="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-xl-12">
+                <div class="post-single">
+                    <div class="post-thumb">
+                        <img src="{{ blog.image.url }}" alt="" class="img-fluid">
+                    </div>
+                    <div class="single-post-content">
+                        <div class="post-meta">
+                            <span class="post-date"><i class="fa fa-calendar-alt mr-2"></i> {{ blog.Timestamp}}</span>
+                        </div>
+                        <h3 class="post-title">{{blog.title}}</h3>
+                        <p>{{blog.content|safe}}</p>
+                    </div>
+
+                    <!--  Share -->
+                    <div class="blog-footer-meta d-md-flex justify-content-between align-items-center">
+                        <div class="article-share d-md-flex align-items-center">
+                            <h6>Share: </h6>
+                            <ul class="social-icon">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i> </a></li>
+                                <li>
+                                    <a href="#"> <i class="fab fa-twitter"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <i class="fab fa-instagram"></i> </a>
+                                </li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i> </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

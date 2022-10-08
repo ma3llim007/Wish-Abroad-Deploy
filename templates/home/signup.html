@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sign Up | Wish Abroad{% endblock title %}
+{% block body %}
+<section class="woocommerce single page-wrapper">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-xl-7">
+                    <div class="form-header">
+                        <h2 class="font-weight-bold mb-3">Sign Up</h2>
+                        <p class="woocommerce-register">
+                            Already have an account? <a href="login" class="text-decoration-underline">Log in</a>
+                        </p>
+                    </div>
+
+                    <form method="post" action="/signup" class="woocommerce-form woocommerce-form-register register">
+                        <div class="row">
+                            {% csrf_token %}
+                            <div class="col-xl-6">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label for="fname">First Name&nbsp;<span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" required>
+                                </p>
+                            </div>
+                            <div class="col-xl-6">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label for="lname">Last Name&nbsp;<span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="lname" id="lname"  placeholder="Last Name" required>
+                                </p>
+                            </div>
+                            <div class="col-xl-6">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label for="Username">User Name&nbsp;<span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="username" id="username" value="" placeholder="Username" required>
+                                </p>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label for="email">Email&nbsp;<span class="required">*</span></label>
+                                    <input type="email" class="form-control" name="email" id="email" value="" placeholder="Your Email" required>
+                                </p>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label for="password">Password&nbsp;<span class="required">*</span></label>
+                                    <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
+                                </p>
+                            </div>
+                            <div class="col-xl-6">
+                                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                    <label for="rpasssword">Re-Enter Password&nbsp;<span class="required">*</span></label>
+                                    <input type="password" class="form-control" name="rpassword" id="rpasssword" value="" placeholder="Re-Enter Password" required>
+                                </p>
+                            </div>
+
+                            <div class="col-xl-12">
+                                <div class="d-flex align-items-center justify-content-between py-2">
+                                    <p class="form-row">
+                                        <label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__policy">
+                                            <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="policy" type="checkbox" id="policy" value="forever"> <span>Accept the Terms and Privacy Policy</span>
+                                        </label>
+                                    </p>
+            
+                                    <p class="woocommerce-LostPassword lost_password">
+                                        <a href="#">Forgot password?</a>
+                                    </p>
+                               </div>
+                            </div>
+                        </div>
+                      
+                        <p class="woocommerce-FormRow form-row">
+                            <button type="submit" class="woocommerce-button button" name="register" value="Register">Register</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

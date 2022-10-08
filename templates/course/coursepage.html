@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load course_discount_tag %}
+{% block keywords %}{% endblock keywords %}
+{% block description %}{% endblock description %}
+{% block title %}{{course.name}} | Course {% endblock title %}
+{% block body %}
+<style>
+.no-preview{
+    cursor: not-allowed;
+}
+
+</style>
+<section class="course-page-header">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-8">
+                <div class="title-block">
+                    <h1>{{course.name}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- course description-->
+<section class="page-wrapper">
+    <div class="tutori-course-content ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xl-8 ">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{video.video_url}}?modestbranding=1&rel=0&autoplay=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; " allowfullscreen>
+                    </iframe> 
+                    <br>
+                    <div class="container">
+                        <h3>{{video.title}}</h3>
+                        <p>{{video.desciption}}</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-xl-4">
+                    <h6>Current Video :- <b>{{video.title}}</b></h6>
+                    {% is_enrolled request course as enrolled %}
+                    {% for v in videos %}
+                    <div class="d-flex justify-content-between align-items-center btn {% if not enrolled and not v.is_preview %} text-muted no-preview {% endif %}">
+                        <span >
+                            <i class="fas fa-play-circle"></i>
+                            <a href="?lecture={{v.serial_number}}">{{v}}</a>
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock body %}

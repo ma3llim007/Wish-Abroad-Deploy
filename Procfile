@@ -1,1 +1,1 @@
-web: wishabroad.wsgi --log-file -
+web: gunicorn wishabroad.wsgi --log-file -
